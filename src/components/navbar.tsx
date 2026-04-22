@@ -9,7 +9,7 @@ export default function Navbar() {
 
     return (
         <header className="w-full fixed top-0 left-0 z-50">
-            <nav className="flex items-center justify-between px-6 md:px-16 py-4 backdrop-blur-md bg-white border-b border-black-200">
+            <nav className="flex items-center justify-between px-6 md:px-16 py-2 backdrop-blur-md bg-white border-b border-black-200">
 
                 {/* Logo */}
                 <div className="text-gray-800 font-bold text-xl tracking-wide">

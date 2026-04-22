@@ -17,8 +17,8 @@ export default function Button({
   textColor = "text-white",
   hoverColor = "hover:bg-blue-700",
   radius = "rounded-lg",
-  padding = "px-5 py-3",
-  fontSize = "text-xl",
+  padding = "px-3 py-3",
+  fontSize = "text-lg",
   className = "",
   ...props
 }: ButtonProps) {

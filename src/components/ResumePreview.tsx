@@ -1,3 +1,5 @@
+import { ExperienceItem } from "@/types";
+
 export default function ResumePreview({ data }: any) {
 
   return (
@@ -9,6 +11,19 @@ export default function ResumePreview({ data }: any) {
       <p>{data.email} | {data.phone}</p>
       <p>{data.linkedinURL} | {data.githubURL}</p>
       <p>{data.cityState}, {data.country}</p>
+
+      <div>
+        <h1 className="text-2xl font-bold">Experience</h1>
+        {data.experiences.map((exp: ExperienceItem,ind: any) =>(
+          <div key={ind} className="mb-2">
+            <p className="font-semibold text-lg">{exp.jobTitle}</p>
+            <p>{exp.company}, {exp.location}</p>
+            <p>{exp.description}</p>
+            <p>{exp.startDate}</p>
+            <p>{exp.endDate}</p>
+          </div>
+        ))}
+      </div>
 
     </div>
   );

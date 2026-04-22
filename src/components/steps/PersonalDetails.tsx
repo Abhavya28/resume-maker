@@ -1,18 +1,10 @@
 "use client";
 
+import { PersonalDetailsItem } from "@/types";
 import { FormField } from "../inputField";
 
 interface Props {
-    data: {
-        firstName: string;
-        lastName: string;
-        email: string;
-        phone: string;
-        linkedinURL: string;
-        githubURL: string;
-        cityState: string;
-        country: string;
-    };
+    data: PersonalDetailsItem;
     onChange: (
         e:
             | React.ChangeEvent<HTMLInputElement>
