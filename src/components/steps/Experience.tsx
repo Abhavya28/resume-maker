@@ -7,9 +7,8 @@ interface Props {
     data: ExperienceItem[];
     onChange: (
         index: number,
-        e:
-            | React.ChangeEvent<HTMLInputElement>
-            | React.ChangeEvent<HTMLTextAreaElement>
+        name: keyof ExperienceItem,
+        value: any
     ) => void;
     addExperience: () => void;
     removeExperience: (index: number) => void;
@@ -39,7 +38,9 @@ export default function Experience({
                             name="jobTitle"
                             id={`jobTitle-${index}`}
                             value={exp.jobTitle}
-                            onChange={(e) => onChange(index, e)}
+                            onChange={(e) =>
+                                onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
+                            }
                             required
                         />
 
@@ -48,44 +49,88 @@ export default function Experience({
                             name="company"
                             id={`company-${index}`}
                             value={exp.company}
-                            onChange={(e) => onChange(index, e)}
+                            onChange={(e) =>
+                                onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
+                            }
                         />
                     </div>
 
-                    <FormField
-                        label="Location"
-                        name="location"
-                        id={`location-${index}`}
-                        value={exp.location}
-                        onChange={(e) => onChange(index, e)}
-                    />
-
                     <div className="grid grid-cols-2 gap-4">
+                        <FormField
+                            label="City"
+                            name="city"
+                            id="city"
+                            placeholder="City"
+                            value={exp.city}
+                            onChange={(e) =>
+                                onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
+                            }
+                        />
 
-                        <div className="flex flex-col">
-                            <label className="text-sm font-medium text-gray-700">
-                                Start Date
-                            </label>
-                            <input
-                                type="date"
-                                name="startDate"
-                                value={exp.startDate}
-                                onChange={(e) => onChange(index, e)}
-                                className="mt-1 p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary"
-                            />
+                        <FormField
+                            label="State"
+                            name="state"
+                            id="state"
+                            placeholder=""
+                            value={exp.state}
+                            onChange={(e) =>
+                                onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
+                            }
+                        />
+                    </div>
+
+                    <div className="space-y-3">
+
+                        {/* Dates row */}
+                        <div className="grid grid-cols-2 gap-4">
+
+                            <div className="flex flex-col">
+                                <label className="text-sm font-medium text-gray-700 mb-1">
+                                    Start Date
+                                </label>
+                                <input
+                                    type="month"
+                                    name="startDate"
+                                    value={exp.startDate}
+                                    onChange={(e) =>
+                                        onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
+                                    }
+                                    className="p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary"
+                                />
+                            </div>
+
+                            <div className="flex flex-col">
+                                <label className="text-sm font-medium text-gray-700 mb-1">
+                                    End Date
+                                </label>
+                                <input
+                                    type="month"
+                                    name="endDate"
+                                    value={exp.endDate}
+                                    disabled={exp.isCurrent}
+                                    onChange={(e) =>
+                                        onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
+                                    }
+                                    className="p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
+                                />
+                            </div>
+
                         </div>
 
-                        <div className="flex flex-col">
-                            <label className="text-sm font-medium text-gray-700">
-                                End Date
-                            </label>
+                        {/* Checkbox below (clean UX) */}
+                        <div className="flex items-center gap-2 mt-1">
                             <input
-                                type="date"
-                                name="endDate"
-                                value={exp.endDate}
-                                onChange={(e) => onChange(index, e)}
-                                className="mt-1 p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary"
+                                type="checkbox"
+                                checked={exp.isCurrent}
+                                onChange={(e) =>
+                                    onChange(index, "isCurrent", e.target.checked)
+                                }
+                                className="w-4 h-4 accent-black cursor-pointer"
                             />
+
+                            <label className="text-sm text-gray-700 cursor-pointer">
+                                I currently work here
+                            </label>
                         </div>
 
                     </div>
@@ -97,7 +142,9 @@ export default function Experience({
                         <textarea
                             name="description"
                             value={exp.description}
-                            onChange={(e) => onChange(index, e)}
+                            onChange={(e) =>
+                                onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
+                            }
                             className="w-full mt-1 p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary"
                             rows={3}
                             placeholder="Describe your achievements..."

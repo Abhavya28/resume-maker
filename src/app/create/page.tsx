@@ -3,16 +3,14 @@
 import ResumePreview from "@/src/components/ResumePreview";
 import Experience from "@/src/components/steps/Experience";
 import PersonalDetails from "@/src/components/steps/PersonalDetails";
-import { ExperienceItem } from "@/types";
+import { ExperienceItem, ResumeData } from "@/types";
 
 import { ChevronLeft } from "lucide-react";
 import { useState } from "react";
 
 export default function page() {
   const [step, setStep] = useState(0);
-
-  // ✅ Personal + Experience combined state
-  const [data, setData] = useState({
+  const [data, setData] = useState<ResumeData>({
     firstName: "",
     lastName: "",
     email: "",
@@ -26,10 +24,12 @@ export default function page() {
       {
         jobTitle: "",
         company: "",
-        location: "",
+        city: "",
+        state: "",
         startDate: "",
         endDate: "",
         description: "",
+        isCurrent: false,
       },
     ],
   });
@@ -38,18 +38,22 @@ export default function page() {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
- const handleExperienceChange = (
-  index: number,
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-) => {
-  const updated = [...data.experiences];
+  const handleExperienceChange = (
+    index: number,
+    name: keyof ExperienceItem,
+    value: any
+  ) => {
+    const updated = [...data.experiences];
 
-  const name = e.target.name as keyof ExperienceItem;
-  updated[index][name] = e.target.value;
+    (updated[index] as any)[name] = value;
 
-  setData({ ...data, experiences: updated });
-};
+    if (name === "isCurrent" && value) {
+      updated[index].endDate = "";
+    }
 
+    setData({ ...data, experiences: updated });
+  };
+  
   const addExperience = () => {
     setData({
       ...data,
@@ -58,10 +62,12 @@ export default function page() {
         {
           jobTitle: "",
           company: "",
-          location: "",
+          city: "",
+          state: "",
           startDate: "",
           endDate: "",
           description: "",
+          isCurrent: false,
         },
       ],
     });
@@ -122,7 +128,7 @@ export default function page() {
         </div>
 
         {/* RIGHT */}
-        <div className="hidden lg:block sticky top-24">
+        <div className="sticky top-24">
           <ResumePreview data={data} />
         </div>
 
