@@ -4,3 +4,13 @@
   --primary: #1a91f0;
   --darkText: #29303c;
 }
+
+/* Hide scrollbar but keep scroll working */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

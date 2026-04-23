@@ -1,6 +1,7 @@
 "use client";
 
 import ResumePreview from "@/src/components/ResumePreview";
+import Education from "@/src/components/steps/Education";
 import Experience from "@/src/components/steps/Experience";
 import PersonalDetails from "@/src/components/steps/PersonalDetails";
 import { ExperienceItem, ResumeData } from "@/types";
@@ -8,7 +9,7 @@ import { ExperienceItem, ResumeData } from "@/types";
 import { ChevronLeft } from "lucide-react";
 import { useState } from "react";
 
-export default function page() {
+export default function Page() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<ResumeData>({
     firstName: "",
@@ -32,6 +33,17 @@ export default function page() {
         isCurrent: false,
       },
     ],
+
+    education: [
+      {
+        school: "",
+        degree: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+        city: "",
+      }
+    ],
   });
 
   const handleChange = (e: any) => {
@@ -53,7 +65,18 @@ export default function page() {
 
     setData({ ...data, experiences: updated });
   };
-  
+
+  const handleEducationChange = (
+    index: number,
+    name: keyof (typeof data.education)[0],
+    value: any
+  ) => {
+    const updated = [...data.education];
+    updated[index][name] = value;
+
+    setData({ ...data, education: updated });
+  };
+
   const addExperience = () => {
     setData({
       ...data,
@@ -73,11 +96,32 @@ export default function page() {
     });
   };
 
+  const addEducation = () => {
+    setData({
+      ...data,
+      education: [
+        ...data.education,
+        {
+          school: "",
+          degree: "",
+          startDate: "",
+          endDate: "",
+          description: "",
+          city: "",
+        },
+      ],
+    });
+  };
+
   const removeExperience = (index: number) => {
     const updated = data.experiences.filter((_, i) => i !== index);
     setData({ ...data, experiences: updated });
   };
 
+  const removeEducation = (index: number) => {
+    const updated = data.education.filter((_, i) => i !== index);
+    setData({ ...data, education: updated });
+  };
   const steps = [
     <PersonalDetails data={data} onChange={handleChange} />,
     <Experience
@@ -86,6 +130,13 @@ export default function page() {
       addExperience={addExperience}
       removeExperience={removeExperience}
     />,
+    <Education
+      data={data.education}
+      onChange={handleEducationChange}
+      addEducation={addEducation}
+      removeEducation={removeEducation}
+    />,
+
   ];
 
   const next = () => {
@@ -97,11 +148,11 @@ export default function page() {
   };
 
   return (
-    <section className="min-h-screen px-4 md:px-16 lg:px-24 py-20 bg-gray-100">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8">
+    <section className="min-h-screen px-2 md:px-4 lg:px-8 py-20 bg-gray-100 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_794px] gap-8 lg:h-[calc(100vh-80px)]">
 
         {/* LEFT */}
-        <div className="bg-white p-6 rounded-xl shadow flex flex-col justify-between">
+        <div className="bg-white p-6 rounded-xl shadow flex flex-col justify-between w-full min-w-0  lg:h-full lg:overflow-y-auto no-scrollbar">
           <p className="text-sm text-gray-500 mb-4">
             Step {step + 1} of {steps.length}
           </p>
@@ -128,7 +179,7 @@ export default function page() {
         </div>
 
         {/* RIGHT */}
-        <div className="sticky top-24">
+        <div className="lg:h-full lg:overflow-y-auto flex justify-center no-scrollbar">
           <ResumePreview data={data} />
         </div>
 
