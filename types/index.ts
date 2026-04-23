@@ -9,6 +9,7 @@ export interface ResumeData {
   country: string;
   experiences: ExperienceItem[];
   education: EducationItem[];
+  skills: SkillItem[];
 }
 
 export interface PersonalDetailsItem {
@@ -40,4 +41,8 @@ export interface EducationItem {
   endDate: string;
   description: string;
   city: string;
+}
+
+export interface SkillItem{
+  skillName: string;
 }

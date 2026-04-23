@@ -1,8 +1,6 @@
-import { EducationItem, ExperienceItem } from "@/types";
+import { EducationItem, ExperienceItem, SkillItem } from "@/types";
 
 export default function ResumePreview({ data }: any) {
-
-
   const formatDate = (date: any) => {
     if (!date) return "";
     const [year, month] = date.split("-");
@@ -12,9 +10,8 @@ export default function ResumePreview({ data }: any) {
     });
   };
 
-
   return (
-    <div className="bg-white shadow-lg rounded-md w-[794px] min-h-[1123px] mx-auto p-10">
+    <div className="bg-white shadow-lg rounded-xl w-full min-h-[1123px] mx-auto p-10 border border-gray-200">
 
       {/* HEADER */}
       <div className="border-b pb-2">
@@ -144,6 +141,30 @@ export default function ResumePreview({ data }: any) {
             })}
           </div>
         )}
+
+      {/* SKILLS */}
+      {data.skills.some(
+        (skill: SkillItem) => skill.skillName
+      ) && (
+        <div className="mt-4">
+          <h2 className="text-lg font-semibold mb-2">Skills</h2>
+
+          <div className="flex flex-wrap gap-2">
+            {data.skills.map((skill: any, index: number) => {
+              if (!skill.skillName) return null;
+
+              return (
+                <span
+                  key={index}
+                  className="px-3 py-1 text-xs bg-gray-200 rounded-full text-gray-800"
+                >
+                  {skill.skillName}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
     </div>
   );

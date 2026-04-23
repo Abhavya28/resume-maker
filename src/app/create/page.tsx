@@ -4,6 +4,7 @@ import ResumePreview from "@/src/components/ResumePreview";
 import Education from "@/src/components/steps/Education";
 import Experience from "@/src/components/steps/Experience";
 import PersonalDetails from "@/src/components/steps/PersonalDetails";
+import Skills from "@/src/components/steps/Skills";
 import { ExperienceItem, ResumeData } from "@/types";
 
 import { ChevronLeft } from "lucide-react";
@@ -44,6 +45,12 @@ export default function Page() {
         city: "",
       }
     ],
+
+    skills:[
+      {
+        skillName: "",
+      }
+    ],
   });
 
   const handleChange = (e: any) => {
@@ -75,6 +82,17 @@ export default function Page() {
     updated[index][name] = value;
 
     setData({ ...data, education: updated });
+  };
+
+ const handleSkillChange = (
+    index: number,
+    name: keyof (typeof data.skills)[0],
+    value: any
+  ) => {
+    const updated = [...data.skills];
+    updated[index][name] = value;
+
+    setData({ ...data, skills: updated });
   };
 
   const addExperience = () => {
@@ -113,6 +131,18 @@ export default function Page() {
     });
   };
 
+  const addSkill = () => {
+    setData({
+      ...data,
+      skills: [
+        ...data.skills,
+        {
+          skillName: "",
+        },
+      ],
+    });
+  };
+
   const removeExperience = (index: number) => {
     const updated = data.experiences.filter((_, i) => i !== index);
     setData({ ...data, experiences: updated });
@@ -122,6 +152,12 @@ export default function Page() {
     const updated = data.education.filter((_, i) => i !== index);
     setData({ ...data, education: updated });
   };
+
+  const removeSkill = (index: number) => {
+    const updated = data.skills.filter((_, i) => i !== index);
+    setData({ ...data, skills: updated });
+  };
+
   const steps = [
     <PersonalDetails data={data} onChange={handleChange} />,
     <Experience
@@ -136,7 +172,12 @@ export default function Page() {
       addEducation={addEducation}
       removeEducation={removeEducation}
     />,
-
+    <Skills
+      data={data.skills}
+      onChange={handleSkillChange}
+      addSkill={addSkill}
+      removeSkill={removeSkill}
+    />,
   ];
 
   const next = () => {
@@ -149,15 +190,15 @@ export default function Page() {
 
   return (
     <section className="min-h-screen px-2 md:px-4 lg:px-8 py-20 bg-gray-100 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_794px] gap-8 lg:h-[calc(100vh-80px)]">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_794px] gap-2 lg:h-[calc(100vh-80px)]">
 
         {/* LEFT */}
-        <div className="bg-white p-6 rounded-xl shadow flex flex-col justify-between w-full min-w-0  lg:h-full lg:overflow-y-auto no-scrollbar">
+        <div className="bg-white p-6 rounded-xl shadow flex flex-col justify-between w-full min-w-0  lg:h-full lg:overflow-y-auto no-scrollbar border border-gray-200">
           <p className="text-sm text-gray-500 mb-4">
             Step {step + 1} of {steps.length}
           </p>
 
-          <div>{steps[step]}</div>
+          <div className="flex top-0">{steps[step]}</div>
 
           <div className="flex justify-between mt-6">
             <button
