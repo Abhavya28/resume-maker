@@ -11,6 +11,7 @@ export interface ResumeData {
   education: EducationItem[];
   skills: SkillItem[];
   summary:string;
+  certificates: CertificateItem[];
 }
 
 export interface PersonalDetailsItem {
@@ -46,4 +47,12 @@ export interface EducationItem {
 
 export interface SkillItem{
   skillName: string;
+}
+
+export interface CertificateItem{
+  name: string;
+  issuer: string;
+  startDate: string;
+  endDate: string;
+  isCurrent: boolean;
 }

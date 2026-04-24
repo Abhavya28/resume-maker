@@ -21,7 +21,7 @@ export default function Skills({
     removeSkill,
 }: Props) {
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 w-full">
             <h2 className="text-xl font-bold">Skills</h2>
             <p className="text-gray-500">
                 Add up to 5 skills that best represent your expertise.
@@ -30,7 +30,7 @@ export default function Skills({
             {data.map((skill, index) => (
                 <div
                     key={index}
-                    className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border"
+                    className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border flex-col items-start"
                 >
                     <FormField
                         label="Skill"
@@ -56,7 +56,7 @@ export default function Skills({
                 <button
                     type="button"
                     onClick={addSkill}
-                    className="px-4 py-2 bg-primary text-black rounded-md hover:opacity-90"
+                    className="px-4 py-2 bg-black text-white rounded-md hover:opacity-90"
                 >
                     + Add Skill
                 </button>

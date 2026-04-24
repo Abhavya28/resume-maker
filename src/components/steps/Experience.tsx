@@ -21,7 +21,7 @@ export default function Experience({
     removeExperience,
 }: Props) {
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 w-full">
             <h2 className="text-xl font-bold">Work Experience</h2>
             <p className="text-gray-500">
                 Add your relevant work experience. Focus on impact, not just tasks.
@@ -161,13 +161,13 @@ export default function Experience({
                 </div>
             ))}
 
-            <button
-                type="button"
-                onClick={addExperience}
-                className="px-4 py-2 bg-primary text-black rounded-md hover:opacity-90"
-            >
-                + Add Experience
-            </button>
+             <button
+        type="button"
+        onClick={addExperience}
+        className="px-4 py-2 bg-black text-white rounded-md hover:opacity-90"
+      >
+        + Add Experience
+      </button>
         </div>
     );
 }

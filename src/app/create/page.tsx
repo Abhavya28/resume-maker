@@ -1,12 +1,13 @@
 "use client";
 
 import ResumePreview from "@/src/components/ResumePreview";
-import Education from "@/src/components/steps/Education";
-import Experience from "@/src/components/steps/Experience";
-import PersonalDetails from "@/src/components/steps/PersonalDetails";
-import Skills from "@/src/components/steps/Skills";
-import Summary from "@/src/components/steps/Summary";
-import { ExperienceItem, ResumeData } from "@/types";
+import Certificates from "@/src/components/steps/certificates";
+import Education from "@/src/components/steps/education";
+import Experience from "@/src/components/steps/experience";
+import PersonalDetails from "@/src/components/steps/personalDetails";
+import Skills from "@/src/components/steps/skills";
+import Summary from "@/src/components/steps/summary";
+import { CertificateItem, ExperienceItem, ResumeData } from "@/types";
 
 
 import { ChevronLeft } from "lucide-react";
@@ -54,6 +55,16 @@ export default function Page() {
       }
     ],
     summary: "",
+
+    certificates: [
+      {
+        name: "",
+        issuer: "",
+        startDate: "",
+        endDate: "",
+        isCurrent: false,
+      }
+    ]
   });
 
   const handleChange = (e: any) => {
@@ -100,6 +111,22 @@ export default function Page() {
 
   const handleSummaryChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleCertificateChange = (
+    index: number,
+    name: keyof CertificateItem,
+    value: any
+  ) => {
+    const updated = [...data.certificates];
+
+    (updated[index] as any)[name] = value;
+
+    if (name === "isCurrent" && value) {
+      updated[index].endDate = "";
+    }
+
+    setData({ ...data, certificates: updated });
   };
 
   const addExperience = () => {
@@ -150,6 +177,22 @@ export default function Page() {
     });
   };
 
+  const addCertificate = () => {
+    setData({
+      ...data,
+      certificates: [
+        ...data.certificates,
+        {
+          name: "",
+          issuer: "",
+          startDate: "",
+          endDate: "",
+          isCurrent: false,
+        }
+      ]
+    })
+  }
+
   const removeExperience = (index: number) => {
     const updated = data.experiences.filter((_, i) => i !== index);
     setData({ ...data, experiences: updated });
@@ -163,6 +206,11 @@ export default function Page() {
   const removeSkill = (index: number) => {
     const updated = data.skills.filter((_, i) => i !== index);
     setData({ ...data, skills: updated });
+  };
+
+  const removeCertificate = (index: number) => {
+    const updated = data.certificates.filter((_, i) => i !== index);
+    setData({ ...data, certificates: updated });
   };
 
   const steps = [
@@ -191,6 +239,12 @@ export default function Page() {
     <Summary
       data={data}
       onChange={handleSummaryChange}
+    />,
+    <Certificates
+      data={data.certificates}
+      onChange={handleCertificateChange}
+      addCertificate={addCertificate}
+      removeCertificate={removeCertificate}
     />,
   ];
 
@@ -240,7 +294,7 @@ export default function Page() {
             Step {step + 1} of {steps.length}
           </p>
 
-          <div className="flex top-0">{steps[step]}</div>
+          <div className="flex">{steps[step]}</div>
 
           <div className="flex justify-between mt-6">
             <button

@@ -13,8 +13,8 @@ export default function ResumePreview({ data }: any) {
   return (
     <div className="bg-white shadow-lg rounded-xl w-full min-h-[1123px] mx-auto p-10 border border-gray-200">
 
-      {/* HEADER */}
-      <div className="border-b pb-2">
+      {/* HEADER / PERSONAL DETAILS */}
+      <div className="pb-3">
         <h1 className="text-3xl font-bold tracking-wide">
           {data.firstName} {data.lastName}
         </h1>
@@ -24,13 +24,12 @@ export default function ResumePreview({ data }: any) {
         </p>
 
         {(data.linkedinURL || data.githubURL) && (
-          <div className="flex items-center gap-3 text-sm text-gray-600">
+          <div className="flex items-center gap-3 text-sm text-gray-600 mt-1">
 
             {data.linkedinURL && (
               <a
                 href={data.linkedinURL}
                 target="_blank"
-                rel="noopener noreferrer"
                 className="hover:text-blue-700 hover:underline"
               >
                 {data.linkedinURL}
@@ -45,43 +44,43 @@ export default function ResumePreview({ data }: any) {
               <a
                 href={data.githubURL}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-700  hover:underline"
+                className="hover:text-blue-700 hover:underline"
               >
                 {data.githubURL}
               </a>
             )}
-
           </div>
         )}
-
 
         <p className="text-gray-600">
           {data.cityState}, {data.country}
         </p>
+
       </div>
+      {/* SUMMARY */}
+      <p className="text-sm text-gray-700 border-b bor leading-relaxed">
+        {data.summary}
+      </p>
 
       {/* EXPERIENCE */}
-      {data.experiences.some(
+      {data.experiences?.some(
         (exp: ExperienceItem) => exp.jobTitle || exp.company
       ) && (
-          <div className="mt-1 border-b ">
-            <h2 className="text-lg font-semibold pb-1 mb-1">
-              Experience
-            </h2>
+          <div className="mt-4 border-b pb-3">
+            <h2 className="text-lg font-semibold mb-2">Experience</h2>
 
             {data.experiences.map((exp: ExperienceItem, ind: number) => {
               if (!exp.jobTitle && !exp.company) return null;
 
               return (
-                <div key={ind} className="mb-2">
+                <div key={ind} className="mb-3">
                   <div className="flex justify-between">
-                    <h3 className="font-semibold text-base">
+                    <h3 className="font-semibold">
                       {exp.jobTitle}
                     </h3>
 
                     <p className="text-gray-500 text-xs">
-                      {formatDate(exp.startDate)} - {" "}
+                      {formatDate(exp.startDate)} -{" "}
                       {exp.isCurrent ? "Present" : formatDate(exp.endDate)}
                     </p>
                   </div>
@@ -90,11 +89,9 @@ export default function ResumePreview({ data }: any) {
                     {exp.company} {exp.city}, {exp.state}
                   </p>
 
-                  {/* Description */}
-                  <p className="mt-1 text-gray-800">
+                  <p className="text-sm mt-1">
                     {exp.description}
                   </p>
-
                 </div>
               );
             })}
@@ -102,40 +99,38 @@ export default function ResumePreview({ data }: any) {
         )}
 
       {/* EDUCATION */}
-      {data.education.some(
+      {data.education?.some(
         (edu: EducationItem) => edu.school || edu.degree
       ) && (
-          <div className="mt-1 border-b">
-            <h2 className="text-lg font-semibold pb-1 mb-1">
-              Education
-            </h2>
+          <div className="mt-4 border-b pb-3">
+            <h2 className="text-lg font-semibold mb-2">Education</h2>
 
             {data.education.map((edu: EducationItem, ind: number) => {
               if (!edu.school && !edu.degree) return null;
 
               return (
-                <div key={ind} className="mb-4">
-                  <div className="flex justify-between items-start">
+                <div key={ind} className="mb-3">
+                  <div className="flex justify-between">
                     <div>
-                      <h3 className="font-semibold text-base text-gray-900">
+                      <h3 className="font-semibold">
                         {edu.school}, {edu.city}
                       </h3>
                       <p className="text-sm text-gray-600 italic">
                         {edu.degree}
                       </p>
                     </div>
-                    <p className="text-gray-500 text-xs whitespace-nowrap">
-                      {formatDate(edu.startDate)} - {" "}
+
+                    <p className="text-gray-500 text-xs">
+                      {formatDate(edu.startDate)} -{" "}
                       {edu.endDate ? formatDate(edu.endDate) : "Present"}
                     </p>
-
                   </div>
+
                   {edu.description && (
-                    <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+                    <p className="text-sm mt-1">
                       {edu.description}
                     </p>
                   )}
-
                 </div>
               );
             })}
@@ -143,26 +138,60 @@ export default function ResumePreview({ data }: any) {
         )}
 
       {/* SKILLS */}
-      {data.skills.some(
-        (skill: SkillItem) => skill.skillName
-      ) && (
-        <div className="mt-4">
+      {data.skills?.some((skill: SkillItem) => skill.skillName) && (
+        <div className="mt-4 border-b pb-3">
           <h2 className="text-lg font-semibold mb-2">Skills</h2>
 
           <div className="flex flex-wrap gap-2">
-            {data.skills.map((skill: any, index: number) => {
+            {data.skills.map((skill: SkillItem, index: number) => {
               if (!skill.skillName) return null;
 
               return (
                 <span
                   key={index}
-                  className="px-3 py-1 text-xs bg-gray-200 rounded-full text-gray-800"
+                  className="px-3 py-1 text-xs bg-gray-200 rounded-full"
                 >
                   {skill.skillName}
                 </span>
               );
             })}
           </div>
+        </div>
+      )}
+
+
+
+      {/* CERTIFICATES (LAST SECTION) */}
+      {data.certificates?.some((cert: any) => cert.name || cert.issuer) && (
+        <div className="mt-4">
+          <h2 className="text-lg font-semibold mb-2">
+            Certifications
+          </h2>
+
+          {data.certificates.map((cert: any, index: number) => {
+            if (!cert.name && !cert.issuer) return null;
+
+            return (
+              <div key={index} className="mb-2">
+                <div className="flex justify-between">
+                  <h3 className="font-semibold text-sm">
+                    {cert.name}
+                  </h3>
+
+                  <p className="text-gray-500 text-xs">
+                    {cert.startDate && formatDate(cert.startDate)}{" "}
+                    {cert.endDate
+                      ? ` - ${formatDate(cert.endDate)}`
+                      : ""}
+                  </p>
+                </div>
+
+                <p className="text-sm text-gray-600 italic">
+                  {cert.issuer}
+                </p>
+              </div>
+            );
+          })}
         </div>
       )}
 

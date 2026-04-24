@@ -21,7 +21,7 @@ export default function Education({
   removeEducation,
 }: Props) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       <h2 className="text-xl font-bold">Education</h2>
       <p className="text-gray-500">
         Add your education, training or programs to highlight your progress.
@@ -126,10 +126,10 @@ export default function Education({
         </div>
       ))}
 
-      <button
+       <button
         type="button"
         onClick={addEducation}
-        className="px-4 py-2 bg-primary text-black rounded-md hover:opacity-90"
+        className="px-4 py-2 bg-black text-white rounded-md hover:opacity-90"
       >
         + Add Education
       </button>
