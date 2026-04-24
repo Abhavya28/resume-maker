@@ -1,5 +1,6 @@
 "use client";
 
+import Pagination from "@/src/components/Pagination";
 import ResumePreview from "@/src/components/ResumePreview";
 import Certificates from "@/src/components/steps/certificates";
 import Education from "@/src/components/steps/education";
@@ -9,8 +10,6 @@ import Skills from "@/src/components/steps/skills";
 import Summary from "@/src/components/steps/summary";
 import { CertificateItem, ExperienceItem, ResumeData } from "@/types";
 
-
-import { ChevronLeft } from "lucide-react";
 import { useRef, useState } from "react";
 
 export default function Page() {
@@ -285,43 +284,30 @@ export default function Page() {
   }
 
   return (
-    <section className="min-h-screen px-2 md:px-4 lg:px-8 py-20 bg-gray-100 overflow-x-hidden">
+    <section className="min-h-screen px-2 md:px-4 lg:px-8 pt-18 bg-gray-100 overflow-x-hidden">
       <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_794px] gap-2 lg:h-[calc(100vh-80px)]">
 
         {/* LEFT */}
-        <div className="bg-white p-6 rounded-xl shadow flex flex-col justify-between w-full min-w-0  lg:h-full lg:overflow-y-auto no-scrollbar border border-gray-200">
-          <p className="text-sm text-gray-500 mb-4">
-            Step {step + 1} of {steps.length}
-          </p>
+        <div className="bg-white rounded-xl shadow flex flex-col w-full min-w-0 border border-gray-200 lg:h-full">
 
-          <div className="flex">{steps[step]}</div>
+          <div className="flex-1 overflow-y-auto p-6">
+            <p className="text-sm text-gray-500 mb-4">
+              Step {step + 1} of {steps.length}
+            </p>
 
-          <div className="flex justify-between mt-6">
-            <button
-              onClick={prev}
-              disabled={step === 0}
-              className="px-4 py-2 border rounded disabled:opacity-50"
-            >
-              <ChevronLeft />
-            </button>
-
-            <button
-              onClick={next}
-              disabled={step === steps.length - 1}
-              className="px-4 py-2 bg-black text-white rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-
-            {step === steps.length - 1 && (
-              <button
-                onClick={handleDownload}
-                className="px-4 py-2 bg-green-600 text-white rounded-md"
-              >
-                Download PDF
-              </button>
-            )}
+            <div>{steps[step]}</div>
           </div>
+
+          <div className="border-t p-4 bg-white">
+            <Pagination
+              step={step}
+              totalSteps={steps.length}
+              onNext={next}
+              onPrev={prev}
+              onDownload={handleDownload}
+            />
+          </div>
+
         </div>
 
         {/* RIGHT */}

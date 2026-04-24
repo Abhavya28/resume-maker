@@ -5,6 +5,11 @@
   --darkText: #29303c;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 /* Hide scrollbar but keep scroll working */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -13,4 +18,14 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.break-inside-avoid {
+  break-inside: avoid;
+}
+
+@media print {
+  .break-inside-avoid {
+    page-break-inside: avoid;
+  }
 }

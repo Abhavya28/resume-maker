@@ -51,10 +51,10 @@ const LandingPage = () => {
   }, [text, isDeleting, wordIndex]);
 
   return (
-    <div className="min-h-screen bg-[#F7F9FC] text-darkText font-sans antialiased">
+    <div className="min-h-screen bg-[#F7F9FC] text-darkText font-sans antialiased pt-20">
       <section className="relative min-h-screen flex items-center justify-center px-6 md:px-16 lg:px-24 text-center">
 
-        <div className="max-w-3xl w-full flex flex-col items-center">
+        <div className="max-w-3xl w-full flex flex-col items-center justify-center">
           <h1 className="text-5xl leading-tight md:text-5xl font-bold max-w-2xl mb-5 text-gray-800">
             Build resumes that get you
           </h1>

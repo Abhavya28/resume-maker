@@ -24,7 +24,7 @@ export default function Skills({
         <div className="space-y-6 w-full">
             <h2 className="text-xl font-bold">Skills</h2>
             <p className="text-gray-500">
-                Add up to 5 skills that best represent your expertise.
+                Add up to 8 skills that best represent your expertise.
             </p>
 
             {data.map((skill, index) => (
