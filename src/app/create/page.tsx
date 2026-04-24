@@ -5,10 +5,12 @@ import Education from "@/src/components/steps/Education";
 import Experience from "@/src/components/steps/Experience";
 import PersonalDetails from "@/src/components/steps/PersonalDetails";
 import Skills from "@/src/components/steps/Skills";
+import Summary from "@/src/components/steps/Summary";
 import { ExperienceItem, ResumeData } from "@/types";
 
+
 import { ChevronLeft } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Page() {
   const [step, setStep] = useState(0);
@@ -46,11 +48,12 @@ export default function Page() {
       }
     ],
 
-    skills:[
+    skills: [
       {
         skillName: "",
       }
     ],
+    summary: "",
   });
 
   const handleChange = (e: any) => {
@@ -84,7 +87,7 @@ export default function Page() {
     setData({ ...data, education: updated });
   };
 
- const handleSkillChange = (
+  const handleSkillChange = (
     index: number,
     name: keyof (typeof data.skills)[0],
     value: any
@@ -93,6 +96,10 @@ export default function Page() {
     updated[index][name] = value;
 
     setData({ ...data, skills: updated });
+  };
+
+  const handleSummaryChange = (e: any) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const addExperience = () => {
@@ -159,7 +166,10 @@ export default function Page() {
   };
 
   const steps = [
-    <PersonalDetails data={data} onChange={handleChange} />,
+    <PersonalDetails
+      data={data}
+      onChange={handleChange}
+    />,
     <Experience
       data={data.experiences}
       onChange={handleExperienceChange}
@@ -178,6 +188,10 @@ export default function Page() {
       addSkill={addSkill}
       removeSkill={removeSkill}
     />,
+    <Summary
+      data={data}
+      onChange={handleSummaryChange}
+    />,
   ];
 
   const next = () => {
@@ -187,6 +201,34 @@ export default function Page() {
   const prev = () => {
     if (step > 0) setStep(step - 1);
   };
+
+  const resumeRef = useRef<HTMLDivElement>(null);
+
+  const handleDownload = async () => {
+    const element = resumeRef.current;
+    if (!element) return;
+
+    const html2pdf = (await import("html2pdf.js")).default;
+
+    html2pdf()
+      .from(element)
+      .set({
+        margin: 0,
+        filename: "resume.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+        },
+        jsPDF: {
+          unit: "mm",
+          format: "a4",
+          orientation: "portrait",
+        },
+        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+      } as any)
+      .save();
+  }
 
   return (
     <section className="min-h-screen px-2 md:px-4 lg:px-8 py-20 bg-gray-100 overflow-x-hidden">
@@ -216,11 +258,20 @@ export default function Page() {
             >
               Next
             </button>
+
+            {step === steps.length - 1 && (
+              <button
+                onClick={handleDownload}
+                className="px-4 py-2 bg-green-600 text-white rounded-md"
+              >
+                Download PDF
+              </button>
+            )}
           </div>
         </div>
 
         {/* RIGHT */}
-        <div className="lg:h-full lg:overflow-y-auto flex justify-center no-scrollbar">
+        <div ref={resumeRef} className="lg:h-full lg:overflow-y-auto flex justify-center no-scrollbar">
           <ResumePreview data={data} />
         </div>
 

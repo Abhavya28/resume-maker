@@ -10,6 +10,7 @@ export interface ResumeData {
   experiences: ExperienceItem[];
   education: EducationItem[];
   skills: SkillItem[];
+  summary:string;
 }
 
 export interface PersonalDetailsItem {
@@ -31,7 +32,7 @@ export interface ExperienceItem {
   startDate: string;
   endDate: string;
   description: string;
-  isCurrent: false;
+  isCurrent: boolean;
 }
 
 export interface EducationItem {
