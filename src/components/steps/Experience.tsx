@@ -81,9 +81,7 @@ export default function Experience({
 
                     <div className="space-y-3">
 
-                        {/* Dates row */}
                         <div className="grid grid-cols-2 gap-4">
-
                             <div className="flex flex-col">
                                 <label className="text-sm font-medium text-gray-700 mb-1">
                                     Start Date
@@ -161,13 +159,13 @@ export default function Experience({
                 </div>
             ))}
 
-             <button
-        type="button"
-        onClick={addExperience}
-        className="px-4 py-2 bg-black text-white rounded-md hover:opacity-90"
-      >
-        + Add Experience
-      </button>
+            <button
+                type="button"
+                onClick={addExperience}
+                className="px-4 py-2 bg-black text-white rounded-md hover:opacity-90"
+            >
+                + Add Experience
+            </button>
         </div>
     );
 }

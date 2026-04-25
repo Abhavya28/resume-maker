@@ -52,7 +52,6 @@ export default function Certific({
             />
           </div>
 
-          {/* Dates */}
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label className="text-sm font-medium text-gray-700 mb-1">
@@ -84,7 +83,6 @@ export default function Certific({
             </div>
           </div>
 
-          {/* Remove */}
           <div className="flex justify-end">
             <button
               type="button"
@@ -97,7 +95,6 @@ export default function Certific({
         </div>
       ))}
 
-      {/* Add Button */}
       <button
         type="button"
         onClick={addCertificate}

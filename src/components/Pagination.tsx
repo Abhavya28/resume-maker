@@ -30,26 +30,24 @@ export default function Pagination({
       </Button>
 
       <div className="flex gap-3">
-        {step != totalSteps - 1 && (
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onNext}
-              disabled={step === totalSteps - 1}
-              className="px-4 py-2 bg-black text-white rounded"
-            >
-              Next
-            </motion.button>
-          )}
-
-        {step === totalSteps - 1 && (
-          <Button
-            onClick={onDownload}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-500"
+        {(step != totalSteps - 1) ? (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onNext}
+            disabled={step === totalSteps - 1}
+            className="px-4 py-2 bg-black text-white rounded"
           >
-            Download PDF
-          </Button>
-        )}
+            Next
+          </motion.button>)
+          : (
+            <Button
+              onClick={onDownload}
+              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-500"
+            >
+              Download PDF
+            </Button>
+          )}
       </div>
     </div>
   );
