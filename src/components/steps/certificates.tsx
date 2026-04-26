@@ -10,7 +10,7 @@ interface Props {
   removeCertificate: (index: number) => void;
 }
 
-export default function Certific({
+export default function Certificates({
   data,
   onChange,
   addCertificate,
