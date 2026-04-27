@@ -9,8 +9,9 @@ import PersonalDetails from "@/src/components/steps/personalDetails";
 import Skills from "@/src/components/steps/skills";
 import Summary from "@/src/components/steps/summary";
 import { CertificateItem, ExperienceItem, ResumeData } from "@/types";
-
+import { useReactToPrint } from "react-to-print";
 import { useRef, useState } from "react";
+
 
 export default function Page() {
   const [step, setStep] = useState(0);
@@ -248,7 +249,14 @@ export default function Page() {
   ];
 
   const next = () => {
-    if (step < steps.length - 1) setStep(step + 1);
+    if (step === 0) {
+      if (!data.firstName.trim() || !data.email.trim()) {
+        alert("First Name and Email are required");
+        return;
+      }
+    }
+
+    setStep(step + 1);
   };
 
   const prev = () => {
@@ -257,31 +265,32 @@ export default function Page() {
 
   const resumeRef = useRef<HTMLDivElement>(null);
 
-  const handleDownload = async () => {
-    const element = resumeRef.current;
-    if (!element) return;
+  const handlePrint = useReactToPrint({
+    contentRef: resumeRef,
+    documentTitle: "resume",
+  });
 
-    const html2pdf = (await import("html2pdf.js")).default;
+  // const handleDownload = async () => {
+  //   if (!resumeRef.current) return;
 
-    html2pdf()
-      .from(element)
-      .set({
-        margin: 0,
-        filename: "resume.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true,
-        },
-        jsPDF: {
-          unit: "mm",
-          format: "a4",
-          orientation: "portrait",
-        },
-        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
-      } as any)
-      .save();
-  }
+  //   const element = resumeRef.current;
+
+  //   // Force safe colors
+  //   element.style.backgroundColor = "#ffffff";
+  //   element.style.color = "#000000";
+
+  //   const html2pdf = (await import("html2pdf.js")).default;
+
+  //   html2pdf()
+  //     .from(element)
+  //     .set({
+  //       margin: 0,
+  //       filename: "resume.pdf",
+  //       html2canvas: { scale: 2 },
+  //       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  //     })
+  //     .save();
+  // };
 
   return (
     <section className="min-h-screen px-2 md:px-4 lg:px-8 pt-18 bg-gray-100 overflow-x-hidden">
@@ -304,7 +313,7 @@ export default function Page() {
               totalSteps={steps.length}
               onNext={next}
               onPrev={prev}
-              onDownload={handleDownload}
+              onDownload={handlePrint}
             />
           </div>
 

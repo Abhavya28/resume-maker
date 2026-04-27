@@ -41,7 +41,7 @@ const LandingPage = () => {
   }, [text, isDeleting, wordIndex]);
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-indigo-100 px-6">
+    <section className="min-h-screen flex items-center justify-center bg-linear-to-br from-white via-blue-50 to-indigo-100 px-6">
       
       <div className="max-w-4xl text-center flex flex-col items-center">
         
@@ -53,7 +53,7 @@ const LandingPage = () => {
           Build resumes that get you
         </h1>
 
-        <h2 className="text-4xl md:text-6xl font-bold text-blue-500 italic mt-2 h-[60px]">
+        <h2 className="text-4xl md:text-6xl font-bold text-blue-500 italic mt-2 h-15">
           {text}
           <span className="animate-pulse">|</span>
         </h2>

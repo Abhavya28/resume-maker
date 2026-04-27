@@ -15,7 +15,7 @@ export default function ResumePreview({ data }: any) {
     <div className="bg-white w-[794px] min-h-[1123px] mx-auto p-10 text-gray-900">
 
       {/* HEADER */}
-      <div className="pb-3 border-b">
+      <div className="pb-3 border-b items-center flex flex-col justify-center">
         <h1 className="text-3xl font-bold tracking-wide">
           {data.firstName} {data.lastName}
         </h1>
