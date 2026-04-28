@@ -2,7 +2,7 @@
 
 Create professional resumes and check how well they match job descriptions using an ATS score system.
 
-🌐 Live Demo: https://your-vercel-link.vercel.app
+🌐 Live Demo: https://resume-makerrr.vercel.app
 
 ---
 
@@ -28,8 +28,8 @@ Create professional resumes and check how well they match job descriptions using
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/Abhavya28/resume-maker
+cd resume-maker
 npm install
 npm run dev
 ```
