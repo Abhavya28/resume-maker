@@ -11,6 +11,7 @@ import Summary from "@/src/components/steps/summary";
 import { CertificateItem, ExperienceItem, ResumeData } from "@/types";
 import { useReactToPrint } from "react-to-print";
 import { useRef, useState } from "react";
+import ATSChecker from "@/src/components/ATSChecker";
 
 
 export default function Page() {
@@ -320,8 +321,17 @@ export default function Page() {
         </div>
 
         {/* RIGHT */}
-        <div ref={resumeRef} className="lg:h-full lg:overflow-y-auto flex justify-center no-scrollbar">
+        <div
+          ref={resumeRef}
+          className="lg:h-full lg:overflow-y-auto flex flex-col items-center gap-4 no-scrollbar py-2"
+        >
           <ResumePreview data={data} />
+
+          {step === steps.length - 1 && (
+            <div className="w-[794px]">
+              <ATSChecker data={data} />
+            </div>
+          )}
         </div>
 
       </div>

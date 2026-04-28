@@ -72,7 +72,7 @@ const LandingPage = () => {
         </div>
 
         <p className="mt-6 text-sm text-gray-400">
-          No signup required • Instant download
+          Instant download • ATS Score Checker
         </p>
 
       </div>
