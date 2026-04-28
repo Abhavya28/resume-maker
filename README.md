@@ -1,6 +1,6 @@
 # 🚀 Resume Builder with ATS Score
 
-Create professional resumes and check how well they match job descriptions using an ATS score system.
+A modern Resume Builder that lets users create professional resumes with a step-by-step form, real-time preview and built-in ATS score analysis.
 
 🌐 Live Demo: https://resume-makerrr.vercel.app
 
