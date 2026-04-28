@@ -30,7 +30,7 @@ export default function Skills({
             {data.map((skill, index) => (
                 <div
                     key={index}
-                    className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border flex-col items-start"
+                    className="flex items-start gap-3 bg-gray-50 p-3 rounded-lg border flex-col"
                 >
                     <FormField
                         label="Skill"
