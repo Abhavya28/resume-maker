@@ -82,7 +82,7 @@ export default function Experience({
                     <div className="space-y-3">
 
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="flex flex-col">
+                            <div className="">
                                 <label className="text-sm font-medium text-gray-700 mb-1">
                                     Start Date
                                 </label>
@@ -97,7 +97,7 @@ export default function Experience({
                                 />
                             </div>
 
-                            <div className="flex flex-col">
+                            <div className="">
                                 <label className="text-sm font-medium text-gray-700 mb-1">
                                     End Date
                                 </label>
