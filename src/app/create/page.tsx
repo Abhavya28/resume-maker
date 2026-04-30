@@ -325,10 +325,12 @@ export default function Page() {
           ref={resumeRef}
           className="lg:h-full lg:overflow-y-auto flex flex-col items-center gap-4 no-scrollbar py-2"
         >
-          <ResumePreview data={data} />
+          <div className="w-full max-w-[794px]">
+            <ResumePreview data={data} />
+          </div>
 
           {step === steps.length - 1 && (
-            <div className="w-[794px]">
+            <div className="w-full max-w-[794px]">
               <ATSChecker data={data} />
             </div>
           )}

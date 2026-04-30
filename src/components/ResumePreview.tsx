@@ -12,7 +12,7 @@ export default function ResumePreview({ data }: any) {
   };
 
   return (
-    <div className="bg-white w-[794px] min-h-[1123px] mx-auto p-10 text-gray-900">
+    <div className="bg-white w-full max-w-[794px] min-h-[1123px] mx-auto p-4 md:p-10 text-gray-900 break-words">
 
       {/* HEADER */}
       <div className="pb-3 border-b items-center flex flex-col justify-center">
