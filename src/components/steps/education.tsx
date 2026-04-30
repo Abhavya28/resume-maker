@@ -80,7 +80,7 @@ export default function Education({
                 onChange={(e) =>
                   onChange(index, "startDate", e.target.value)
                 }
-                className="p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary"
+                 className="p-2 border max-w-full rounded-md outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
 
@@ -95,7 +95,7 @@ export default function Education({
                 onChange={(e) =>
                   onChange(index, "endDate", e.target.value)
                 }
-                className="p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary"
+                 className="p-2 border max-w-full rounded-md outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
           </div>

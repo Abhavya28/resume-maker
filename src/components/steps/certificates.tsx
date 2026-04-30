@@ -63,7 +63,7 @@ export default function Certificates({
                 onChange={(e) =>
                   onChange(index, "startDate", e.target.value)
                 }
-                className="p-2 border rounded-md focus:ring-2 focus:ring-black outline-none"
+                 className="p-2 border max-w-full rounded-md outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
 
@@ -78,7 +78,7 @@ export default function Certificates({
                 onChange={(e) =>
                   onChange(index, "endDate", e.target.value)
                 }
-                className="p-2 border rounded-md focus:ring-2 focus:ring-black outline-none disabled:bg-gray-100"
+                 className="p-2 border max-w-full rounded-md outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
           </div>
