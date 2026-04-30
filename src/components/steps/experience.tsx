@@ -93,7 +93,7 @@ export default function Experience({
                                     onChange={(e) =>
                                         onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
                                     }
-                                    className="p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary"
+                                    className="p-2 border max-w-full rounded-md outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -109,7 +109,7 @@ export default function Experience({
                                     onChange={(e) =>
                                         onChange(index, e.target.name as keyof ExperienceItem, e.target.value)
                                     }
-                                    className="p-2 border rounded-md outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
+                                    className="p-2 border max-w-full rounded-md outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
                                 />
                             </div>
 
