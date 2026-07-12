@@ -1,4 +1,4 @@
-# 🚀 Resume Builder with ATS Score
+## Resume Builder with ATS Score
 
 A modern Resume Builder that lets users create professional resumes with a step-by-step form, real-time preview and built-in ATS score analysis.
 
