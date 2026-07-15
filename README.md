@@ -25,7 +25,7 @@ A modern Resume Builder that lets users create professional resumes with a step-
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation Instructions
 
 ```bash
 git clone https://github.com/Abhavya28/resume-maker
